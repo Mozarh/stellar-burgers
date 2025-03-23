@@ -37,4 +37,11 @@ export type TUser = {
   name: string;
 };
 
+export type TConstructorItems = {
+  bun: Partial<TIngredient>;
+  ingredients: TIngredientUnique[];
+};
+
+export type TIngredientUnique = TIngredient & { id: string };
+
 export type TTabMode = 'bun' | 'sauce' | 'main';
