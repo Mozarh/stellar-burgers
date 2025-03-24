@@ -269,44 +269,30 @@ export const stellarBurgerSlice = createSlice({
 
 export const fetchIngredients = createAsyncThunk(
   'ingredients/getAll',
-  async () => getIngredientsApi()
+  getIngredientsApi
 );
 
-export const fetchGetFeed = createAsyncThunk('user/feed', async () =>
-  getFeedsApi()
-);
+export const fetchGetFeed = createAsyncThunk('user/feed', getFeedsApi);
 
-export const fetchGetOrders = createAsyncThunk('user/orders', async () =>
-  getOrdersApi()
-);
+export const fetchGetOrders = createAsyncThunk('user/orders', getOrdersApi);
 
 export const fetchNewOrder = createAsyncThunk(
   'orders/newOrder',
-  async (data: string[]) => orderBurgerApi(data)
+  orderBurgerApi
 );
 
 export const fetchRegisterUser = createAsyncThunk(
   'user/register',
-  async (data: TRegisterData) => registerUserApi(data)
+  registerUserApi
 );
 
-export const fetchLogin = createAsyncThunk(
-  'user/login',
-  async (data: TLoginData) => loginUserApi(data)
-);
+export const fetchLogin = createAsyncThunk('user/login', loginUserApi);
 
-export const fetchGetUser = createAsyncThunk('user/get', async () =>
-  getUserApi()
-);
+export const fetchGetUser = createAsyncThunk('user/get', getUserApi);
 
-export const fetchUpdateUser = createAsyncThunk(
-  'user/update',
-  async (user: Partial<TRegisterData>) => updateUserApi(user)
-);
+export const fetchUpdateUser = createAsyncThunk('user/update', updateUserApi);
 
-export const fetchLogout = createAsyncThunk('user/logout', async () =>
-  logoutApi()
-);
+export const fetchLogout = createAsyncThunk('user/logout', logoutApi);
 
 export const {
   selectIngredients,

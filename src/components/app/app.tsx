@@ -1,7 +1,7 @@
 import '../../index.css';
 import styles from './app.module.css';
 
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import { AppHeader, OrderInfo, Modal, IngredientDetails } from '@components';
 import {
@@ -18,15 +18,11 @@ import {
 import { ProtectedRoute } from '../protected-route';
 import { useDispatch, useSelector } from '../../services/store';
 import {
-  closeModal,
-  fetchGetFeed,
   fetchGetUser,
   fetchIngredients,
   init,
   selectIngredients,
-  selectIsAuthenticated,
-  selectIsModalOpened,
-  selectOrders
+  selectIsAuthenticated
 } from '../../slices/stellarBurgerSlice';
 import { deleteCookie, getCookie } from '../../utils/cookie';
 import { useEffect } from 'react';
@@ -34,12 +30,11 @@ import { useEffect } from 'react';
 export const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const backgroundLocation = location.state?.background;
-  const isModalOpen = useSelector(selectIsModalOpened);
   const token = getCookie('accessToken');
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const ingredients = useSelector(selectIngredients);
-  const feed = useSelector(selectOrders);
 
   useEffect(() => {
     if (token && !isAuthenticated) {
@@ -55,19 +50,13 @@ export const App = () => {
     } else {
       dispatch(init());
     }
-  }, []);
+  }, [dispatch, isAuthenticated, token]);
 
   useEffect(() => {
     if (!ingredients.length) {
       dispatch(fetchIngredients());
     }
-  }, []);
-
-  useEffect(() => {
-    if (!feed.length) {
-      dispatch(fetchGetFeed());
-    }
-  }, []);
+  }, [dispatch, ingredients]);
 
   return (
     <div className={styles.app}>
@@ -136,7 +125,7 @@ export const App = () => {
         />
       </Routes>
 
-      {isModalOpen && backgroundLocation && (
+      {backgroundLocation && (
         <Routes>
           <Route
             path='/ingredients/:id'
@@ -144,7 +133,7 @@ export const App = () => {
               <Modal
                 title={'Описание ингредиента'}
                 onClose={() => {
-                  dispatch(closeModal());
+                  navigate(-1);
                 }}
               >
                 <IngredientDetails />
@@ -158,7 +147,7 @@ export const App = () => {
                 <Modal
                   title={'Заказ'}
                   onClose={() => {
-                    dispatch(closeModal());
+                    navigate(-1);
                   }}
                 >
                   <OrderInfo />
@@ -172,7 +161,7 @@ export const App = () => {
               <Modal
                 title={'Заказ'}
                 onClose={() => {
-                  dispatch(closeModal());
+                  navigate(-1);
                 }}
               >
                 <OrderInfo />
