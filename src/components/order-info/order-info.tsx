@@ -1,11 +1,13 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { redirect, useParams } from 'react-router-dom';
-import { useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import {
+  fetchOrderById,
   selectIngredients,
+  selectOrder,
   selectOrders
 } from '../../slices/stellarBurgerSlice';
 
@@ -15,8 +17,14 @@ export const OrderInfo: FC = () => {
     redirect('/feed');
     return null;
   }
+  const dispatch = useDispatch();
 
   const orders = useSelector(selectOrders);
+  const order = useSelector(selectOrder);
+
+  useEffect(() => {
+    dispatch(fetchOrderById(Number(order)));
+  }, [dispatch]);
 
   const orderData = orders.find(
     (item) => item.number === parseInt(params.number!)

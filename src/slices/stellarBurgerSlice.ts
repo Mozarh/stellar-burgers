@@ -18,7 +18,8 @@ import {
   getFeedsApi,
   getOrdersApi,
   logoutApi,
-  updateUserApi
+  updateUserApi,
+  getOrderByNumberApi
 } from '@api';
 
 type TStellarBurger = {
@@ -36,6 +37,7 @@ type TStellarBurger = {
   isInit: boolean;
   isModalOpened: boolean;
   errorText: string;
+  orderByNumber: TOrder[] | [];
 };
 
 const initialState: TStellarBurger = {
@@ -60,7 +62,8 @@ const initialState: TStellarBurger = {
   isAuthenticated: false,
   isInit: false,
   isModalOpened: false,
-  errorText: ''
+  errorText: '',
+  orderByNumber: []
 };
 
 export const stellarBurgerSlice = createSlice({
@@ -150,6 +153,7 @@ export const stellarBurgerSlice = createSlice({
     selectOrderModalData: (state) => state.orderModalData,
     selectUser: (state) => state.user,
     selectOrders: (state) => state.orders,
+    selectOrder: (state) => state.orderByNumber[0],
     selectTotalOrders: (state) => state.totalOrders,
     selectTotalToday: (state) => state.totalToday,
     selectUserOrders: (state) => state.userOrders,
@@ -263,6 +267,16 @@ export const stellarBurgerSlice = createSlice({
       })
       .addCase(fetchLogout.rejected, (state, action) => {
         state.loading = false;
+      })
+      .addCase(fetchOrderById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchOrderById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = action.payload.orders;
+      })
+      .addCase(fetchOrderById.rejected, (state, action) => {
+        state.loading = false;
       });
   }
 });
@@ -294,6 +308,11 @@ export const fetchUpdateUser = createAsyncThunk('user/update', updateUserApi);
 
 export const fetchLogout = createAsyncThunk('user/logout', logoutApi);
 
+export const fetchOrderById = createAsyncThunk(
+  'orders/getOrderByNumber',
+  async (orderNumber: number) => await getOrderByNumberApi(orderNumber)
+);
+
 export const {
   selectIngredients,
   selectLoading,
@@ -308,7 +327,8 @@ export const {
   selectIsAuthenticated,
   selectIsInit,
   selectIsModalOpened,
-  selectErrorText
+  selectErrorText,
+  selectOrder
 } = stellarBurgerSlice.selectors;
 
 export const {
