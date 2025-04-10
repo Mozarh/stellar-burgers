@@ -40,7 +40,7 @@ type TStellarBurger = {
   orderByNumber: TOrder[] | [];
 };
 
-const initialState: TStellarBurger = {
+export const initialState: TStellarBurger = {
   ingredients: [],
   loading: false,
   constructorItems: {
