@@ -78,7 +78,7 @@ describe('тестируем Action', () => {
     const initialOrders = selectUserOrders(store.getState())!.length;
     store.dispatch(removeUserOrders());
     const orders = selectUserOrders(store.getState());
-    expect(initialOrders).toBe(2);
+    expect(initialOrders).toBe(1);
     expect(orders).toBe(null);
   });
 

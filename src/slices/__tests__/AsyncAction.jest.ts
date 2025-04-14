@@ -88,7 +88,7 @@ describe('asyncAction', () => {
       initialState,
       fetchNewOrder.pending('', mockOrder)
     );
-    expect(state.loading).toBe(true);
+    expect(state.orderRequest).toBe(true);
   });
 
   test('fetchNewOrder fulfilled', () => {

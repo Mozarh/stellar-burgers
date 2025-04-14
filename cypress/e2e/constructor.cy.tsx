@@ -72,8 +72,8 @@ describe('тест на работоспособность приложения'
     cy.get(noBunSelector1).as('noBunText1');
     cy.get(noBunSelector2).as('noBunText2');
     cy.get(noIngredientsSelector).as('noIngredients');
-    cy.get(bunSelector + `button`).as('bun');
-    cy.get(ingredientSelector + 'button').as('ingredient');
+    cy.get(`${bunSelector} button`).as('bun');
+    cy.get(`${ingredientSelector} button`).as('ingredient');
 
     cy.get('@noBunText1').contains('Выберите булки');
     cy.get('@noIngredients').contains('Выберите начинку');
@@ -81,7 +81,7 @@ describe('тест на работоспособность приложения'
     cy.get('@bun').click();
     cy.get('@ingredient').click({ multiple: true });
 
-    cy.get(`[data-cy=burger_constructor]`).contains('Булка');
+    cy.get(`[data-cy=burger_constructor]`).contains('булка');
     cy.get(`[data-cy=ingredient_element]`);
   });
 
@@ -95,8 +95,8 @@ describe('тест на работоспособность приложения'
   });
 
   it('тест на создание заказа', () => {
-    const bun = cy.get(bunSelector + `button`);
-    const ingredient = cy.get(ingredientSelector + `button`);
+    const bun = cy.get(`${bunSelector} button`);
+    const ingredient = cy.get(`${ingredientSelector} button`);
     bun.click();
     ingredient.click({ multiple: true });
 

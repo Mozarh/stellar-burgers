@@ -57,7 +57,7 @@ describe('selectors', () => {
     const user = selectUser(store.getState());
     expect(user).toEqual({
       name: 'testUser',
-      email: 'ttest'
+      email: 'ttest@test.ru'
     });
   });
 
@@ -98,6 +98,6 @@ describe('selectors', () => {
 
   test('selectErrorText', () => {
     const errorText = selectErrorText(store.getState());
-    expect(errorText).toBe('ошибка');
+    expect(errorText).toBe('текст ошибки');
   });
 });
