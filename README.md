@@ -13,7 +13,7 @@
 ## Ссылки и макет
 * URL решения: [Github](https://github.com/Mozarh/stellar-burgers);
 * Макет задания: [Figma](https://www.figma.com/design/UuC07QYEfmogQuPe6gQDql/React-Fullstack_-%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BD%D1%8B%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8--3-%D0%BC%D0%B5%D1%81%D1%8F%D1%86%D0%B0-_external_link--Copy-?node-id=849-1002&t=mXM8zwKkuaYlPbYE-1).
-* 
+  
 ## Скриншот
 ![image](https://github.com/user-attachments/assets/3d53be44-e040-410d-b97c-5a7c109d5f14)
 
